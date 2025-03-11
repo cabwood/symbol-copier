@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symbol Copier</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            position: relative;
+        }
+        .search-container {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .search-box {
+            padding: 5px;
+            font-size: 16px;
+            width: 200px;
+        }
+        .highlight {
+            background: yellow;
+        }
+        .category {
+            margin-bottom: 20px;
+            width: 100%;
+        }
+        .category h2 {
+            margin: 10px 0;
+        }
+        .symbols-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            width: 100%;
+        }
+        .symbol-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .symbol {
+            font-size: 24px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.2s;
+            text-align: center;
+            min-width: 40px;
+            font-family: "Arial Unicode MS", "Cambria Math", "Noto Sans Math", sans-serif;
+        }
+        .symbol:hover {
+            background: #f0f0f0;
+        }
+        .symbol-caption {
+            font-size: 12px;
+            color: #555;
+            margin-top: 4px;
+        }
+        .popup {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.75);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 16px;
+            opacity: 1;
+            transition: opacity 0.5s;
+        }
+    </style>
+</head>
+<body>
+    <div class="search-container">
+        <input type="text" class="search-box" placeholder="Search for a symbol..." oninput="searchSymbol()">
+    </div>
+    
+    <div id="symbols-wrapper"></div>
+    
+    <script>
+        const categories = {
+            'Mathematical Operators': {
+                'times': '×', 'minus': '−', 'plus-minus': '±', 'divide': '÷', 'square-root': '√', 'infinity': '∞',
+                'sum': '∑', 'integral': '∫', 'approximately': '≈', 'not-equal': '≠', 'greater-equal': '≥', 'less-equal': '≤'
+            },
+            'Set Notation': {
+                'subset': '⊂', 'superset': '⊃', 'subset-equal': '⊆', 'superset-equal': '⊇', 'intersection': '∩', 'union': '∪',
+                'element-of': '∈', 'not-element-of': '∉', 'empty-set': '∅'
+            },
+            'Greek Letters': {
+                'alpha': 'α', 'beta': 'β', 'gamma': 'γ', 'delta': 'δ', 'epsilon': 'ε', 'zeta': 'ζ', 'eta': 'η',
+                'theta': 'θ', 'iota': 'ι', 'kappa': 'κ', 'lambda': 'λ', 'mu': 'μ', 'nu': 'ν', 'xi': 'ξ', 'omicron': 'ο',
+                'pi': 'π', 'rho': 'ρ', 'sigma': 'σ', 'tau': 'τ', 'upsilon': 'υ', 'phi': 'φ', 'chi': 'χ', 'psi': 'ψ', 'omega': 'ω',
+                'Gamma': 'Γ', 'Delta': 'Δ', 'Theta': 'Θ', 'Lambda': 'Λ', 'Xi': 'Ξ', 'Pi': 'Π', 'Sigma': 'Σ', 'Upsilon': 'Υ', 'Phi': 'Φ', 'Psi': 'Ψ', 'Omega': 'Ω'
+            },
+            'Geometry': {
+                'angle': '∠', 'perpendicular': '⊥', 'degree': '°', 'prime': '′', 'double-prime': '″'
+            },
+            'Logic': {
+                'logical-and': '∧', 'logical-or': '∨', 'not': '¬', 'implies': '⇒', 'iff': '⇔'
+            },
+            'Arrows': {
+                'right-arrow': '→', 'left-arrow': '←', 'up-arrow': '↑', 'down-arrow': '↓', 'equivalent-arrow': '↔', 'parallel-arrow': '↕'
+            }
+        };
+
+        const symbolsWrapper = document.getElementById('symbols-wrapper');
+        const symbolElements = {};
+
+        function searchSymbol() {
+            const query = document.querySelector('.search-box').value.toLowerCase();
+            Object.values(symbolElements).forEach(span => span.classList.remove('highlight'));
+            
+            Object.entries(symbolElements).forEach(([name, element]) => {
+                if (query && name.toLowerCase().includes(query)) {
+                    element.classList.add('highlight');
+                }
+            });
+        }
+
+        for (const [category, symbols] of Object.entries(categories)) {
+            const section = document.createElement('div');
+            section.classList.add('category');
+            
+            const title = document.createElement('h2');
+            title.textContent = category;
+            section.appendChild(title);
+            
+            const container = document.createElement('div');
+            container.classList.add('symbols-container');
+            
+            for (const [name, symbol] of Object.entries(symbols)) {
+                const symbolBox = document.createElement('div');
+                symbolBox.classList.add('symbol-box');
+                
+                const span = document.createElement('span');
+                span.textContent = symbol;
+                span.classList.add('symbol');
+                span.onclick = () => {
+                    navigator.clipboard.writeText(symbol).then(() => {
+                        showPopup(`Copied: ${symbol}`);
+                    });
+                };
+                
+                const caption = document.createElement('div');
+                caption.textContent = name;
+                caption.classList.add('symbol-caption');
+                
+                symbolBox.appendChild(span);
+                symbolBox.appendChild(caption);
+                container.appendChild(symbolBox);
+                symbolElements[name] = span;
+            }
+            
+            section.appendChild(container);
+            symbolsWrapper.appendChild(section);
+        }
+    </script>
+</body>
+</html>
