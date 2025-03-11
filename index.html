@@ -126,6 +126,18 @@
             });
         }
 
+        function showPopup(message) {
+            const popup = document.createElement('div');
+            popup.textContent = message;
+            popup.classList.add('popup');
+            document.body.appendChild(popup);
+
+            setTimeout(() => {
+                popup.style.opacity = '0';
+                setTimeout(() => popup.remove(), 500);
+            }, 1000);
+        }
+
         for (const [category, symbols] of Object.entries(categories)) {
             const section = document.createElement('div');
             section.classList.add('category');
