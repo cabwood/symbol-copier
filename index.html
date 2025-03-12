@@ -87,7 +87,7 @@
     
     <script>
         const categories = {
-            'Currency Symbols': {
+            'Currency': {
                 'dollar': '$',
                 'cent': '¢',
                 'pound': '£',
@@ -96,9 +96,9 @@
                 'won': '₩',
                 'ruble': '₽',
                 'rupee': '₹',
-                'bitcoin': '₿'
+                'bitcoin': '₿',
             },
-            'Mathematical Operators': {
+            'Mathematics': {
                 'times': '×',
                 'minus': '−',
                 'plus-minus': '±',
@@ -107,13 +107,33 @@
                 'cube-root': '∛',
                 'infinity': '∞',
                 'sum': '∑',
+                'partial-differential': '∂',
+                'nabla': '∇',
+                'laplacian-delta': '∆',
                 'integral': '∫',
+                'double-integral': '∬',
+                'triple-integral': '∭',
+                'contour-integral': '∮',
                 'approximately': '≈',
+                'proportional': '∝',
                 'not-equal': '≠',
                 'greater-equal': '≥',
-                'less-equal': '≤'
+                'less-equal': '≤',
+                'much-less': '≪',
+                'much-greater': '≫',
+                'very-much-less': '⋘',
+                'very-much-greater': '⋙',
+                'laplace-transform': 'ℒ',
+                'fourier-transform': 'ℱ'
             },
             'Set Notation': {
+                'aleph': 'ℵ',
+                'set-complex': 'ℂ',
+                'set-natural': 'ℕ',
+                'set-prime': 'ℙ',
+                'set-rational': 'ℚ',
+                'set-real': 'ℝ',
+                'set-integer': 'ℤ',
                 'subset': '⊂',
                 'superset': '⊃',
                 'subset-equal': '⊆',
@@ -122,7 +142,7 @@
                 'union': '∪',
                 'element-of': '∈',
                 'not-element-of': '∉',
-                'empty-set': '∅'
+                'empty-set': '∅',
             },
             'Greek Letters': {
                 'alpha': 'α',
@@ -160,23 +180,30 @@
                 'Phi': 'Φ',
                 'Psi': 'Ψ',
                 'Omega': 'Ω',
-                'inverted-Omega': '℧'
+                'inverted-Omega': '℧',
             },
             'Geometry': {
-                'angle': '∠',
+                'parallel': '∥',
                 'perpendicular': '⊥',
+                'angle': '∠',
                 'degree': '°',
                 'prime': '′',
-                'double-prime': '″'
+                'double-prime': '″',
             },
             'Logic': {
                 'logical-and': '∧',
                 'logical-or': '∨',
-                'not': '¬',
+                'logical-not': '¬',
+                'logical-nand': '⊼',
+                'logical-nor': '⊽',
+                'logical-xor': '⊕',
+                'logical-xnor': '⊙',
+                'true': '⊤',
+                'false': '⊥',
                 'implies': '⇒',
                 'iff': '⇔',
                 'therefore': '∴',
-                'because': '∵'
+                'because': '∵',
             },
             'Arrows': {
                 'right-arrow': '→',
@@ -184,7 +211,7 @@
                 'up-arrow': '↑',
                 'down-arrow': '↓',
                 'equivalent-arrow': '↔',
-                'parallel-arrow': '↕'
+                'parallel-arrow': '↕',
             },
             'Fractions': {
                 'one-half': '½',
@@ -201,7 +228,7 @@
                 'one-eighth': '⅛',
                 'three-eighths': '⅜',
                 'five-eighths': '⅝',
-                'seven-eighths': '⅞'
+                'seven-eighths': '⅞',
             },
             'Superscripts and subscripts': {
                 'super-0': '⁰',
@@ -231,7 +258,53 @@
                 'sub-minus': '₋',
                 'sub-minus-1': '₋₁',
                 'sub-minus-2': '₋₂',
-                'sub-minus-3': '₋₃'
+                'sub-minus-3': '₋₃',
+            },
+            'Accent': {
+                'overbar': '\u0305',
+                'acute': '\u0301',
+                'grave': '\u0300',
+                'circumflex': '\u0302',
+                'tilde': '\u0303',
+                'diaeresis': '\u0308',
+                'ring': '\u030A',
+                'dot': '\u0307',
+                'breve': '\u0306',
+                'underline': '\u0332',
+                'double-underline': '\u0333',
+                'strikethrough': '\u0336',
+            },
+            'Other': {
+                'copyright': '©',
+                'registered-trademark': '®',
+                'trademark': '™',
+                'section': '§',
+                'pilcrow': '¶',
+                'dagger': '†',
+                'double-dagger': '‡',
+                'ligature-ae-upper': 'Æ',
+                'ligature-ae-lower': 'æ',
+                'ligature-oe-upper': 'Œ',
+                'ligature-oe-lower': 'œ',
+                'tick': '✓',
+                'heavy-tick': '✔',
+                'ballot-tick': '☑',
+                'cross': '✗',
+                'heavy-cross': '✘',
+                'ballot-cross': '☒',
+                'circled-plus': '⊕',
+                'circled-minus': '⊖',
+                'circled-times': '⊗',
+                'circled-division': '⊘',
+                'circled-dot': '⊙',
+                'circled-ring': '⊚',
+                'circled-asterisk': '⊛',
+                'circled-equal': '⊜',
+                'circled-dash': '⊝',
+                'squared-plus': '⊞',
+                'squared-minus': '⊟',
+                'squared-times': '⊠',
+                'squared-dot': '⊡',
             }
         };
 
