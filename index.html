@@ -249,6 +249,43 @@
             });
         }
 
+        function searchSymbol() {
+            const query = document.querySelector('.search-box').value.toLowerCase();
+            let hasMatch = false;
+
+            // Loop through each category
+            document.querySelectorAll('.category').forEach(category => {
+                let categoryMatch = false;
+                
+                // Check symbols in this category
+                category.querySelectorAll('.symbol-box').forEach(symbolBox => {
+                    const caption = symbolBox.querySelector('.symbol-caption').textContent.toLowerCase();
+                    const symbol = symbolBox.querySelector('.symbol').textContent.toLowerCase();
+
+                    if (query && (caption.includes(query) || symbol.includes(query))) {
+                        symbolBox.style.display = 'flex';  // Show matching symbols
+                        categoryMatch = true;
+                        hasMatch = true;
+                    } else {
+                        symbolBox.style.display = query ? 'none' : 'flex';  // Hide unmatched symbols
+                    }
+                });
+
+                // Show or hide the entire category based on matches
+                category.style.display = categoryMatch || !query ? 'block' : 'none';
+            });
+
+            // If no matches found, reset all categories (so user sees all symbols again)
+            if (!hasMatch) {
+                document.querySelectorAll('.category').forEach(category => {
+                    category.style.display = 'block';
+                    category.querySelectorAll('.symbol-box').forEach(symbolBox => {
+                        symbolBox.style.display = 'flex';
+                    });
+                });
+            }
+        }
+
         function showPopup(message) {
             const popup = document.createElement('div');
             popup.textContent = message;
